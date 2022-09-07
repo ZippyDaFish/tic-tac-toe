@@ -10,7 +10,12 @@ const board = (() => {
         const div = document.createElement("div");
         return div;
     };
-    return{gameBoard, createBoard};
+    const editPiece = (index, text) => {
+        gameBoard[index].textContent = text;
+    };
+    console.log(gameBoard);
+    return{createBoard, editPiece};
 })();
 
 board.createBoard();
+board.editPiece(1, "X");
