@@ -3,3 +3,19 @@
     margin: 0;
     padding: 0;
 }
+
+.flex-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.grid-container {
+    width: 300px;
+    height: 300px;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+
+    background-color: gray;
+}
