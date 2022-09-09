@@ -30,8 +30,9 @@ const player2 = playerFactory("O");
 const boardChecks = (() => {
     var playerTurn = player1;
     const turnCheck = (piece) => {
-        if(piece.textContent !== ""){return;}
-        playerTurn.playTurn(piece);
+        if(piece.textContent !== ""){return;} // return if piece is already used
+        playerTurn.playTurn(piece); // change piece depending on player turn
+        // swap player turn
         if(playerTurn == player1){playerTurn = player2;}
         else if(playerTurn == player2){playerTurn = player1;}
         console.log(playerTurn);
