@@ -74,7 +74,21 @@ const boardChecks = (() => {
         return false;
     }
     const checkDiag = () => {
-        console.log("MMMM Diagonals");
+        console.log("Check diag");
+        // check diag
+        let consec = 0;
+        for(i = 0; i < 3; i++){
+            for(n = 0; n < 3; n ++){
+                if(i == n){
+                    if(board.gameBoard[(n+i)*2].textContent == playerTurn.key){
+                        consec++;
+                    }
+                }
+            }
+            if(consec >= 3){
+                return true;
+            }
+        }
         return false;
     }
     const winCheck = () => {
