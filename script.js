@@ -3,7 +3,7 @@ const board = (() => {
     const grid = document.getElementById("grid-board");
     const createBoard = () => {for(let i = 0; i < 9; i++){
         let piece = createGridPiece();
-        piece.addEventListener('click', function handleClick(){boardChecks.turnCheck();});
+        piece.addEventListener('click', function handleClick(){boardChecks.turnCheck(piece);});
         gameBoard.push(piece);
         grid.appendChild(piece);
     }};
@@ -11,8 +11,8 @@ const board = (() => {
         const div = document.createElement("div");
         return div;
     };
-    const editPiece = (index, text) => {
-        gameBoard[index].textContent = text;
+    const editPiece = (piece, text) => {
+        piece.textContent = text;
     };
     console.log(gameBoard);
     return{createBoard, editPiece};
@@ -20,7 +20,7 @@ const board = (() => {
 
 const playerFactory = (key) => {
     this.key = key;
-    const playTurn = (index) => board.editPiece(index, key);
+    const playTurn = (piece) => board.editPiece(piece, key);
     return{key, playTurn};
 };
 
@@ -29,10 +29,14 @@ const player2 = playerFactory("O");
 
 const boardChecks = (() => {
     var playerTurn = player1;
-    const turnCheck = () => {console.log(playerTurn)};
-    console.log("Woop");
+    const turnCheck = (piece) => {
+        if(piece.textContent !== ""){return;}
+        playerTurn.playTurn(piece);
+        if(playerTurn == player1){playerTurn = player2;}
+        else if(playerTurn == player2){playerTurn = player1;}
+        console.log(playerTurn);
+    };
     return{playerTurn, turnCheck};
 })();
 
 board.createBoard();
-board.editPiece(1, "X"); //changes 2nd piece to an X
