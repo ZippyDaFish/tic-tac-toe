@@ -3,6 +3,7 @@ const board = (() => {
     const grid = document.getElementById("grid-board");
     const createBoard = () => {for(let i = 0; i < 9; i++){
         let piece = createGridPiece();
+        piece.addEventListener('click', function handleClick(){boardChecks.turnCheck();});
         gameBoard.push(piece);
         grid.appendChild(piece);
     }};
@@ -17,5 +18,21 @@ const board = (() => {
     return{createBoard, editPiece};
 })();
 
+const playerFactory = (key) => {
+    this.key = key;
+    const playTurn = (index) => board.editPiece(index, key);
+    return{key, playTurn};
+};
+
+const player1 = playerFactory("X");
+const player2 = playerFactory("O");
+
+const boardChecks = (() => {
+    var playerTurn = player1;
+    const turnCheck = () => {console.log(playerTurn)};
+    console.log("Woop");
+    return{playerTurn, turnCheck};
+})();
+
 board.createBoard();
-board.editPiece(1, "X");
+board.editPiece(1, "X"); //changes 2nd piece to an X
