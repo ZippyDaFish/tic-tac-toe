@@ -14,7 +14,6 @@ const board = (() => {
     const editPiece = (piece, text) => {
         piece.textContent = text;
     };
-    console.log(gameBoard);
     return{gameBoard, createBoard, editPiece};
 })();
 
@@ -36,11 +35,9 @@ const boardChecks = (() => {
         // swap player turn
         if(playerTurn == player1){playerTurn = player2;}
         else if(playerTurn == player2){playerTurn = player1;}
-        console.log(playerTurn);
 
     };
     const checkRow =() => {
-        console.log("Check row");
         //check row
         let consec = 0;
         for(i = 0; i < 3; i++){
@@ -57,7 +54,6 @@ const boardChecks = (() => {
         return false;
     }
     const checkCol = () => {
-        console.log("Check col");
         //check col
         let consec = 0;
         for(i = 0; i < 3; i++){
@@ -74,7 +70,6 @@ const boardChecks = (() => {
         return false;
     }
     const checkDiag = () => {
-        console.log("Check diag");
         // check diag
         let consec = 0;
         for(i = 0; i < 3; i++){
@@ -86,6 +81,17 @@ const boardChecks = (() => {
                 }
             }
             if(consec >= 3){
+                return true;
+            }
+        }
+        let consec2 = 0;
+        for(j = 0; j < 9; j++){
+            if(j == 2 || j == 4 || j == 6){
+                if(board.gameBoard[j].textContent == playerTurn.key){
+                    consec2++;
+                }
+            }
+            if(consec2 >= 3){
                 return true;
             }
         }
