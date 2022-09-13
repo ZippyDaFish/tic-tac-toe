@@ -14,7 +14,11 @@ const board = (() => {
     const editPiece = (piece, text) => {
         piece.textContent = text;
     };
-    return{gameBoard, createBoard, editPiece};
+    const clearBoard = () => {
+        gameBoard.splice(0, gameBoard.length);
+        grid.innerHTML = "";
+    }
+    return{gameBoard, createBoard, editPiece, clearBoard};
 })();
 
 const playerFactory = (key) => {
@@ -115,6 +119,17 @@ const boardChecks = (() => {
         }
     }
     return{playerTurn, turnCheck, checkRow, checkCol, checkDiag};
+})();
+
+const settings = (() => {
+    const resetGame = () => {
+        // reset to default
+        board.clearBoard();
+        boardChecks.playerTurn = player1;
+        // create new board
+        board.createBoard();
+    };
+    return{resetGame};
 })();
 
 board.createBoard();
