@@ -37,7 +37,15 @@ const boardChecks = (() => {
         else if(playerTurn == player2){playerTurn = player1;}
 
     };
-    const checkRow =() => {
+    const checkTie = () => {
+        let filled = 0;
+        for(i = 0; i < 9; i++){
+            if(board.gameBoard[i].textContent == ""){return false;}
+            filled++;
+            if(filled >= 9){return true;}
+        }
+    };
+    const checkRow = () => {
         //check row
         let consec = 0;
         for(i = 0; i < 3; i++){
@@ -98,6 +106,8 @@ const boardChecks = (() => {
         return false;
     }
     const winCheck = () => {
+        let tie = checkTie();
+        if(tie == true){console.log("It's a Tie"); return;}
         const checks = [boardChecks.checkRow(), boardChecks.checkCol(), boardChecks.checkDiag()];
         for(i = 0; i < 3; i++){
             let win = checks[i];
