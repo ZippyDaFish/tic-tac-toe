@@ -13,11 +13,13 @@ const board = (() => {
     };
     const editPiece = (piece, text) => {
         piece.textContent = text;
+        console.log(text);
     };
     const clearBoard = () => {
         gameBoard.splice(0, gameBoard.length);
         grid.innerHTML = "";
     }
+    console.log(gameBoard);
     return{gameBoard, createBoard, editPiece, clearBoard};
 })();
 
@@ -29,9 +31,9 @@ const playerFactory = (key) => {
 
 const player1 = playerFactory("X");
 const player2 = playerFactory("O");
+var playerTurn = player1;
 
 const boardChecks = (() => {
-    var playerTurn = player1;
     const turnCheck = (piece) => {
         if(piece.textContent !== ""){return;} // return if piece is already used
         playerTurn.playTurn(piece); // change piece depending on player turn
@@ -39,7 +41,6 @@ const boardChecks = (() => {
         // swap player turn
         if(playerTurn == player1){playerTurn = player2;}
         else if(playerTurn == player2){playerTurn = player1;}
-
     };
     const checkTie = () => {
         let filled = 0;
@@ -110,13 +111,13 @@ const boardChecks = (() => {
         return false;
     }
     const winCheck = () => {
-        let tie = checkTie();
-        if(tie == true){console.log("It's a Tie"); return;}
         const checks = [boardChecks.checkRow(), boardChecks.checkCol(), boardChecks.checkDiag()];
         for(i = 0; i < 3; i++){
             let win = checks[i];
             if(win == true){console.log(playerTurn.key + " Wins"); break;}
         }
+        let tie = checkTie();
+        if(tie == true){console.log("It's a Tie"); return;}
     }
     return{playerTurn, turnCheck, checkRow, checkCol, checkDiag};
 })();
@@ -125,9 +126,11 @@ const settings = (() => {
     const resetGame = () => {
         // reset to default
         board.clearBoard();
-        boardChecks.playerTurn = player1;
+        console.log(board.gameBoard);
         // create new board
         board.createBoard();
+        playerTurn = player1;
+        console.log(playerTurn);
     };
     return{resetGame};
 })();
