@@ -110,6 +110,7 @@ const boardChecks = (() => {
     }
     const gameEnd = (result) => {
         console.log(result);
+        settings.showWinScreen(true);
     }
     const winCheck = () => {
         const checks = [boardChecks.checkRow(), boardChecks.checkCol(), boardChecks.checkDiag()];
@@ -124,6 +125,8 @@ const boardChecks = (() => {
 })();
 
 const settings = (() => {
+    winScreen = document.getElementById('win-wrapper');
+    winScreen.addEventListener('click', function handleClick(){showWinScreen(false);});
     const resetGame = () => {
         // reset to default
         board.clearBoard();
@@ -132,9 +135,15 @@ const settings = (() => {
         playerTurn = player1;
     };
     const showWinScreen = (show) => {
-        winScreen = document.getElementById('win-wrapper');
+        if(show){
+            winScreen.style.display = "flex";
+        }
+        else if(!show){
+            winScreen.style.display = "none";
+        }
     }
-    return{resetGame};
+    return{resetGame, showWinScreen};
 })();
+
 
 board.createBoard();
