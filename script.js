@@ -13,13 +13,11 @@ const board = (() => {
     };
     const editPiece = (piece, text) => {
         piece.textContent = text;
-        console.log(text);
     };
     const clearBoard = () => {
         gameBoard.splice(0, gameBoard.length);
         grid.innerHTML = "";
     }
-    console.log(gameBoard);
     return{gameBoard, createBoard, editPiece, clearBoard};
 })();
 
@@ -110,14 +108,17 @@ const boardChecks = (() => {
         }
         return false;
     }
+    const gameEnd = (result) => {
+        console.log(result);
+    }
     const winCheck = () => {
         const checks = [boardChecks.checkRow(), boardChecks.checkCol(), boardChecks.checkDiag()];
         for(i = 0; i < 3; i++){
             let win = checks[i];
-            if(win == true){console.log(playerTurn.key + " Wins"); break;}
+            if(win == true){gameEnd(playerTurn.key); return;}
         }
         let tie = checkTie();
-        if(tie == true){console.log("It's a Tie"); return;}
+        if(tie == true){gameEnd(tie); return;}
     }
     return{playerTurn, turnCheck, checkRow, checkCol, checkDiag};
 })();
@@ -126,11 +127,9 @@ const settings = (() => {
     const resetGame = () => {
         // reset to default
         board.clearBoard();
-        console.log(board.gameBoard);
         // create new board
         board.createBoard();
         playerTurn = player1;
-        console.log(playerTurn);
     };
     return{resetGame};
 })();
