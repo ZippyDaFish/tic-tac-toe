@@ -1,11 +1,17 @@
 :root {
     --main-color: rgb(224, 224, 224);
     --secondary-color: rgb(39, 39, 39);
+    --btn-color: rgb(165, 165, 165);
 }
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+.text-main {
+    color: var(--secondary-color);
+    font-size: 27px;
 }
 
 .content {
@@ -34,4 +40,24 @@
     justify-content: center;
     align-items: center;
     font-size: 70px;
+}
+
+.btn-main {
+    border: solid 3px black;
+    border-radius: 15px;
+    background-color: var(--btn-color);
+    padding: 10px 20px;
+}
+.btn-main:hover {
+    background-color: var(--main-color);
+}
+
+#win-wrapper {
+    background-color: rgba(228, 228, 228, 0.3);
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
 }

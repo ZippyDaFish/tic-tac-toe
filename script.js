@@ -131,6 +131,9 @@ const settings = (() => {
         board.createBoard();
         playerTurn = player1;
     };
+    const showWinScreen = (show) => {
+        winScreen = document.getElementById('win-wrapper');
+    }
     return{resetGame};
 })();
 

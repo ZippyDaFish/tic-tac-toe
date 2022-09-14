@@ -9,12 +9,18 @@
     <title>TicTacToe | Andrew Riker</title>
 </head>
 <body>
+    <div id="win-wrapper" class="text-main">
+        <h1>X Wins!</h1>
+    </div>
     <div class="flex-container content">
-        <div class="flex-container">
+        <div class="flex-container text-main">
             <h1>Tic Tac Toe</h1>
             <h4>By Andrew Riker</h4>
         </div>
         <div class="grid-container" id="grid-board"></div>
+        <div>
+            <button class="btn-main text-main" onclick="settings.resetGame()">Reset</button>
+        </div>
     </div>
 </body>
 </html>
