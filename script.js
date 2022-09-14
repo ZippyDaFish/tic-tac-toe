@@ -110,7 +110,7 @@ const boardChecks = (() => {
     }
     const gameEnd = (result) => {
         console.log(result);
-        settings.showWinScreen(true);
+        settings.showWinScreen(true, playerTurn.key);
     }
     const winCheck = () => {
         const checks = [boardChecks.checkRow(), boardChecks.checkCol(), boardChecks.checkDiag()];
@@ -134,12 +134,14 @@ const settings = (() => {
         board.createBoard();
         playerTurn = player1;
     };
-    const showWinScreen = (show) => {
+    const showWinScreen = (show, winner) => {
+        document.getElementById('win-disp').innerText = winner + " Wins!"
         if(show){
             winScreen.style.display = "flex";
         }
         else if(!show){
             winScreen.style.display = "none";
+            settings.resetGame();
         }
     }
     return{resetGame, showWinScreen};
