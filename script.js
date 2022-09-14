@@ -108,18 +108,18 @@ const boardChecks = (() => {
         }
         return false;
     }
-    const gameEnd = (result) => {
+    const gameEnd = (result, tie) => {
         console.log(result);
-        settings.showWinScreen(true, playerTurn.key);
+        settings.showWinScreen(true, tie, playerTurn.key);
     }
     const winCheck = () => {
         const checks = [boardChecks.checkRow(), boardChecks.checkCol(), boardChecks.checkDiag()];
         for(i = 0; i < 3; i++){
             let win = checks[i];
-            if(win == true){gameEnd(playerTurn.key); return;}
+            if(win == true){gameEnd(playerTurn.key, false); return;}
         }
         let tie = checkTie();
-        if(tie == true){gameEnd(tie); return;}
+        if(tie == true){gameEnd(playerTurn.key, true); return;}
     }
     return{playerTurn, turnCheck, checkRow, checkCol, checkDiag};
 })();
@@ -134,8 +134,15 @@ const settings = (() => {
         board.createBoard();
         playerTurn = player1;
     };
-    const showWinScreen = (show, winner) => {
-        document.getElementById('win-disp').innerText = winner + " Wins!"
+    const showWinScreen = (show, tie, winner) => {
+        winDisp = document.getElementById('win-disp');
+        if(tie){
+            document.getElementById('win-disp').innerText = "It's a Tie"
+        }
+        else if(!tie){
+            document.getElementById('win-disp').innerText = winner + " Wins!"
+        }
+
         if(show){
             winScreen.style.display = "flex";
         }
